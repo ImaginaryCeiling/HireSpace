@@ -18,7 +18,6 @@ function Submission() {
   const [endDate, setEndDate] = useState("");
   const [hoursPerWeek, setHoursPerWeek] = useState("");
   const [hourlyRate, setHourlyRate] = useState("");
-  const [applicationUrl, setApplicationUrl] = useState("");
 
   // Prevent unauthorized users from accessing this page
   useEffect(() => {
@@ -40,8 +39,7 @@ function Submission() {
       startDate === "" ||
       endDate === "" ||
       hoursPerWeek === "" ||
-      hourlyRate === "" ||
-      applicationUrl === ""
+      hourlyRate === ""
     ) {
       return toast.error("Please fill in all fields");
     }
@@ -58,18 +56,7 @@ function Submission() {
       return toast.error("Hours per week must be positive");
     }
 
-    // Validate the application URL
-    try {
-      new URL(applicationUrl);
-      if (
-        !applicationUrl.startsWith("http://") &&
-        !applicationUrl.startsWith("https://")
-      ) {
-        throw new Error();
-      }
-    } catch {
-      return toast.error("Invalid application URL");
-    }
+    let applicationUrl = "https://example.com";
 
     fetch(`${API_URL}/internship`, {
       method: "POST",
@@ -114,7 +101,6 @@ function Submission() {
     setEndDate("");
     setHoursPerWeek("");
     setHourlyRate("");
-    setApplicationUrl("");
   };
 
   return (
@@ -213,20 +199,7 @@ function Submission() {
               />
             </div>
           </div>
-          <div className="mt-2 grid gap-x-4 gap-y-2 lg:grid-cols-2">
-            <div>
-              <span className="font-semibold">Application URL</span>
-              <input
-                type="text"
-                className="block w-full border border-gray-300 rounded-md mt-1 py-2 px-3 h-10"
-                placeholder="Enter URL"
-                onChange={(e) => {
-                  setApplicationUrl(e.target.value);
-                }}
-                value={applicationUrl}
-              />
-            </div>
-            <div>
+          <div className="mt-2">
               <span className="font-semibold">Tags</span>
               <Select
                 isMulti
@@ -245,7 +218,6 @@ function Submission() {
                 }}
                 value={tags}
               />
-            </div>
           </div>
           <div className="mt-2">
             <span className="mt-5 font-semibold">Description</span>

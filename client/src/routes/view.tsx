@@ -90,8 +90,9 @@ function View() {
             ))}
         </p>
         <a
-          href={internship?.applicationUrl}
+          href={`/internship/apply/${id}`}
           target="_blank"
+          rel="noopener noreferrer"
           className="flex justify-center"
         >
           <button className="bg-primary text-white rounded-lg py-3 font-semibold mt-5 w-48">

@@ -237,7 +237,7 @@ function Root() {
             ${selectedInternship?.hourlyRate} / hour •{" "}
             {selectedInternship?.hoursPerWeek} hours / week
           </p>
-          <a href={selectedInternship?.applicationUrl} target="_blank">
+          <a href={`/internship/apply/${selectedInternship?._id}`} target="_blank">
             <button className="bg-primary text-white rounded-lg px-9 py-4 mt-4 font-semibold">
               Apply
             </button>

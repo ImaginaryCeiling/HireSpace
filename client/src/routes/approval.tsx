@@ -144,16 +144,6 @@ function Approval() {
               </Fragment>
             ))}
         </p>
-        <p className="text-center text-xl font-bold my-6">
-          Application URL:{" "}
-          <a
-            href={internship?.applicationUrl}
-            target="_blank"
-            className="text-blue-500 text-underline inline-block break-all"
-          >
-            {internship?.applicationUrl}
-          </a>
-        </p>
       </div>
       <ToastContainer position="top-center" />
     </div>

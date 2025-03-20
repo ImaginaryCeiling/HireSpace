@@ -66,7 +66,7 @@ function Navbar({ searchBox }: NavbarProps) {
                 {session.roles.includes("moderator") && (
                   <li>
                     <Link
-                      to="/internships/submit"
+                      to="/internship/submit"
                       className="block py-2 px-3 rounded"
                     >
                       Submit Posting
@@ -103,7 +103,7 @@ function Navbar({ searchBox }: NavbarProps) {
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0">
             <li>
               <Link to="/" className="block py-2 px-3 rounded text-white">
-                Find Internships
+                Find Postings
               </Link>
             </li>
             <li>
@@ -125,7 +125,7 @@ function Navbar({ searchBox }: NavbarProps) {
                         <li>
                           {session.roles.includes("employer") && (
                             <Link
-                              to="/internships/submit"
+                              to="/internship/submit"
                               className="block px-4 py-2.5 hover:bg-slate-100"
                             >
                               Submit Posting

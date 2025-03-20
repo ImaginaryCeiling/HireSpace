@@ -12,6 +12,7 @@ import Submission from "./routes/submission";
 import Approval from "./routes/approval";
 import View from "./routes/view";
 import PendingApproval from "./routes/pendingApproval";
+import Application from "./routes/apply";
 import { API_URL } from "./constants";
 
 function App() {
@@ -43,6 +44,10 @@ function App() {
     {
       path: "/internship/view/:id",
       element: <View />,
+    },
+    {
+      path: "/internship/apply/:id",
+      element: <Application />
     },
     {
       path: "/internships/pending",
