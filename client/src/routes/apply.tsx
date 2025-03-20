@@ -7,9 +7,9 @@ import { API_URL } from "../constants";
 
 function Application() {
   const navigate = useNavigate();
-  const { internshipId } = useParams<{ internshipId: string }>();
+  const { id } = useParams<{ id: string }>();
   const session = useContext(SessionContext);
-  const [coverLetter, setCoverLetter] = useState("");
+  const [fitAnswer, setFitAnswer] = useState("");
   const [resumeUrl, setResumeUrl] = useState("");
 
   // Prevent unauthorized users from accessing this page
@@ -23,7 +23,7 @@ function Application() {
 
   const handleSubmit = () => {
     // Ensure all fields are filled in
-    if (coverLetter === "" || resumeUrl === "") {
+    if (fitAnswer === "" || resumeUrl === "") {
       return toast.error("Please fill in all fields");
     }
 
@@ -40,13 +40,13 @@ function Application() {
       return toast.error("Invalid resume URL");
     }
 
-    fetch(`${API_URL}/internship/${internshipId}/apply`, {
+    fetch(`${API_URL}/internship/${id}/apply`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        coverLetter,
+        fitAnswer,
         resumeUrl,
       }),
       credentials: "include",
@@ -66,7 +66,7 @@ function Application() {
   };
 
   const handleClear = () => {
-    setCoverLetter("");
+    setFitAnswer("");
     setResumeUrl("");
   };
 
@@ -82,15 +82,15 @@ function Application() {
             Apply to Internship
           </h1>
           <div className="mt-4">
-            <span className="font-semibold">Cover Letter</span>
+            <span className="font-semibold">Why are you a good fit for this position?</span>
             <textarea
               className="w-full border border-gray-300 rounded-md mt-1 py-2 px-3"
-              rows={10}
-              placeholder="Enter Cover Letter"
+              rows={20}
+              placeholder="Explain why you are a good fit for this position"
               onChange={(e) => {
-                setCoverLetter(e.target.value);
+                setFitAnswer(e.target.value);
               }}
-              value={coverLetter}
+              value={fitAnswer}
             />
           </div>
           <div className="mt-2">

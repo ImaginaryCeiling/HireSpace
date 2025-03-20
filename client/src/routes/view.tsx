@@ -91,7 +91,6 @@ function View() {
         </p>
         <a
           href={`/internship/apply/${id}`}
-          target="_blank"
           rel="noopener noreferrer"
           className="flex justify-center"
         >

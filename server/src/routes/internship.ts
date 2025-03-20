@@ -1,6 +1,7 @@
 import express from 'express';
 import { Types } from 'mongoose';
 import { createInternship, Internship } from '../models/internship';
+import { createApplication, Application } from '../models/application';
 
 const router = express.Router();
 
@@ -109,5 +110,55 @@ router.delete('/internship/:id/reject', async (req, res) => {
 
     res.status(200).send("Internship rejected");
 });
+
+router.post(
+    '/internship/:id/apply',
+    async (req, res) => {
+        // Check if the user is authenticated
+        if (!req.isAuthenticated()) {
+            return res.status(401).send('Not authenticated');
+        }
+
+        // Check if the user has the student role
+        // @ts-ignore - roles always exists on the User object despite TypeScript not recognizing it
+        if (!req.user?.roles.includes('student')) {
+            return res.status(403).send('Not authorized');
+        }
+
+        const { id } = req.params;
+        const { fitAnswer, resumeUrl } = req.body;
+        // @ts-ignore - _id always exists on the User object despite TypeScript not recognizing it
+        const userId = req.user._id;
+
+        // Validate the internship ID
+        if (!Types.ObjectId.isValid(id)) {
+            return res.status(400).send('Invalid internship ID');
+        }
+
+        try {
+            // Check if the internship exists
+            const internship = await Internship.findById(id);
+            if (!internship) {
+                return res.status(404).send('Internship not found');
+            }
+
+            // Create a new application
+            const application = new Application({
+                internship: id,
+                user: userId,
+                fitAnswer,
+                resumeUrl,
+            });
+
+            // Save the application to the database
+            await application.save();
+
+            res.status(200).json({ message: 'Application submitted successfully' });
+        } catch (error) {
+            console.error('Error submitting application:', error);
+            res.status(500).json({ error: 'An error occurred while submitting the application' });
+        }
+    }
+);
 
 export { router as internshipRouter };
