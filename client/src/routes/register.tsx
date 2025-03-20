@@ -12,6 +12,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [role, setRole] = useState("student");
 
   // Prevent logged in users from accessing this page
   useEffect(() => {
@@ -50,6 +51,7 @@ function Register() {
         username,
         email,
         password,
+        roles: [role],
       }),
     })
       .then((res) => {
@@ -70,7 +72,7 @@ function Register() {
     <div>
       <Navbar />
       <div className="container mx-auto max-w-80 md:max-w-96">
-        <h1 className="text-5xl font-bold text-center mt-20 lg:mt-10">
+        <h1 className="text-5xl font-bold text-center mt-20 lg:mt-16">
           Register
         </h1>
         <form className="mt-5">
@@ -113,6 +115,17 @@ function Register() {
                 setConfirmPassword(e.target.value);
               }}
             />
+          </div>
+          <div className="mt-3 mb-8">
+            <span className="font-semibold">Role</span>
+            <select
+              className="block w-full border border-gray-300 rounded-md mt-1 py-2 px-3"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <option value="student">Student</option>
+              <option value="employer">Employer</option>
+            </select>
           </div>
           <input
             type="submit"

@@ -69,7 +69,7 @@ mongoose.connection.on('connected', () => {
   console.log('[database] Connected to MongoDB');
 });
 
-let port = process.env.BACKEND_PORT || 3000;
+let port = process.env.BACKEND_PORT || 8000;
 app.listen(port, () => {
   console.log(`[server] Listening on port ${port}`);
 });
