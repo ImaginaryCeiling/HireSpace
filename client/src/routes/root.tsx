@@ -185,7 +185,7 @@ function Root() {
             setHoursPerWeek={setHoursPerWeek}
           />
           <p className="text-gray-600 mt-4 mb-1 text-center">
-            Found {visibleInternships.length} relevant internship
+            Found {visibleInternships.length} relevant posting
             {visibleInternships.length !== 1 && "s"}
           </p>
           <div className="divide-y">
@@ -206,7 +206,7 @@ function Root() {
         {/* Large screen sidebar */}
         <div className="hidden col-span-3 border overflow-y-auto lg:block">
           <p className="text-gray-600 my-5 ps-8 text-sm xl:text-base">
-            Found {visibleInternships.length} relevant internship
+            Found {visibleInternships.length} relevant posting
             {visibleInternships.length !== 1 && "s"}
           </p>
           {visibleInternships.map((internship) => (
@@ -243,7 +243,7 @@ function Root() {
             </button>
           </a>
           <h1 className="text-3xl font-semibold mt-10">
-            Internship Description
+            Posting Description
           </h1>
           <p className="mt-3 text-lg">
             {/* Safely render newlines in the description */}

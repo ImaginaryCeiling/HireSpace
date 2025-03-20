@@ -79,7 +79,7 @@ function Application() {
         </div>
         <div className="col-span-10">
           <h1 className="text-3xl font-semibold text-center">
-            Apply to Internship
+            Apply to Posting
           </h1>
           <div className="mt-4">
             <span className="font-semibold">Why are you a good fit for this position?</span>

@@ -28,7 +28,7 @@ function View() {
     fetch(`${API_URL}/internship/${id}`)
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Failed to fetch internship data");
+          throw new Error("Failed to fetch posting data");
         } else {
           return res.json();
         }
@@ -43,7 +43,7 @@ function View() {
       fetch(`${API_URL}/profile/${internship.creator}`)
         .then((res) => {
           if (!res.ok) {
-            throw new Error("Failed to fetch internship creator");
+            throw new Error("Failed to fetch posting creator");
           } else {
             return res.json();
           }
@@ -76,7 +76,7 @@ function View() {
           week
         </p>
         <h3 className="text-2xl font-semibold text-center mt-10">
-          Internship Description
+          Posting Description
         </h3>
         <p className="text-lg mt-2 text-justify">
           {/* Safely render newlines in the description */}

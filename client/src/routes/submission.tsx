@@ -80,7 +80,7 @@ function Submission() {
     })
       .then((res) => {
         if (res.status === 200) {
-          alert("Internship submitted successfully!");
+          alert("Posting submitted successfully!");
           navigate("/");
         } else {
           toast.error("An error occurred");
@@ -112,7 +112,7 @@ function Submission() {
         </div>
         <div className="col-span-10">
           <h1 className="text-3xl font-semibold text-center">
-            Submit an Internship
+            Submit a Posting
           </h1>
           <div className="mt-4">
             <span className="font-semibold">Title</span>

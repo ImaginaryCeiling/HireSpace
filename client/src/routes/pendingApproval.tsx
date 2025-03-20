@@ -55,15 +55,15 @@ function PendingApproval() {
       <Navbar />
       <div className="container px-6 mx-auto mt-10">
         <h1 className="text-3xl font-semibold text-center">
-          Internships Pending Approval
+          Postings Pending Approval
         </h1>
         <p className="text-center text-gray-600 mt-2">
-          Showing {internships.length} internship
+          Showing {internships.length} posting
           {internships.length !== 1 && "s"}
         </p>
         {internships.length === 0 && (
           <p className="text-xl text-center text-gray-600 mt-5">
-            No internships pending approval
+            No postings pending approval
           </p>
         )}
         <div className="mt-5 divide-y">
