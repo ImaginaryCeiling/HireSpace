@@ -20,10 +20,12 @@ function Submission() {
   const [hourlyRate, setHourlyRate] = useState("");
   const [applicationUrl, setApplicationUrl] = useState("");
 
-  // Prevent logged out users from accessing this page
+  // Prevent unauthorized users from accessing this page
   useEffect(() => {
     if (session.username === null) {
       navigate("/login");
+    } else if (!session.roles.includes("employer")) {
+      navigate("/");
     }
   }, [session]);
 

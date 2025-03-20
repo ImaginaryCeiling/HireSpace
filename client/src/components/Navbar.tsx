@@ -63,14 +63,16 @@ function Navbar({ searchBox }: NavbarProps) {
             </li>
             {session.loggedIn ? (
               <>
-                <li>
-                  <Link
-                    to="/internship/submit"
-                    className="block py-2 px-3 rounded"
-                  >
-                    Submit Internship
-                  </Link>
-                </li>
+                {session.roles.includes("moderator") && (
+                  <li>
+                    <Link
+                      to="/internships/submit"
+                      className="block py-2 px-3 rounded"
+                    >
+                      Submit Posting
+                    </Link>
+                  </li>
+                )}
                 {session.roles.includes("moderator") && (
                   <li>
                     <Link
@@ -121,12 +123,14 @@ function Navbar({ searchBox }: NavbarProps) {
                       </div>
                       <ul className="text-sm text-gray-600">
                         <li>
-                          <Link
-                            to="/internship/submit"
-                            className="block px-4 py-2.5 hover:bg-slate-100"
-                          >
-                            Submit Internship
-                          </Link>
+                          {session.roles.includes("employer") && (
+                            <Link
+                              to="/internships/submit"
+                              className="block px-4 py-2.5 hover:bg-slate-100"
+                            >
+                              Submit Posting
+                            </Link>
+                          )}
                           {session.roles.includes("moderator") && (
                             <Link
                               to="/internships/pending"
