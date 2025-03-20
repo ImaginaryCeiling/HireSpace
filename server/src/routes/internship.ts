@@ -145,6 +145,7 @@ router.post(
             // Create a new application
             const application = new Application({
                 internship: id,
+                internshipCreator: internship.creator,
                 user: userId,
                 fitAnswer,
                 resumeUrl,
@@ -160,5 +161,66 @@ router.post(
         }
     }
 );
+
+router.get('/applications/pending', async (req, res) => {
+    // Check if the user is authenticated
+    if (!req.isAuthenticated()) {
+        return res.status(401).send('Not authenticated');
+    }
+
+    // Check if the user has the employer role
+    // @ts-ignore - roles always exists on the User object despite TypeScript not recognizing it
+    if (!req.user?.roles.includes('employer')) {
+        return res.status(403).send('Not authorized');
+    }
+
+    // @ts-ignore - _id always exists on the User object despite TypeScript not recognizing it
+    const userId = req.user._id;
+
+    try {
+        // Find all applications for the internships created by the employer
+        const applications = await Application.find({ internshipCreator: userId });
+
+        res.status(200).json(applications);
+    } catch (error) {
+        console.error('Error fetching applications:', error);
+        res.status(500).json({ error: 'An error occurred while fetching the applications' });
+    }
+});
+
+router.get('/application/:id', async (req, res) => {
+    // Check if the user is authenticated
+    if (!req.isAuthenticated()) {
+        return res.status(401).send('Not authenticated');
+    }
+
+    // Check if the user has the employer role
+    // @ts-ignore - roles always exists on the User object despite TypeScript not recognizing it
+    if (!req.user?.roles.includes('employer')) {
+        return res.status(403).send('Not authorized');
+    }
+
+    const applicationId = req.params.id;
+
+    try {
+        // Find the application by ID
+        const application = await Application.findById(applicationId);
+
+        if (!application) {
+            return res.status(404).send('Application not found');
+        }
+
+        // Check if the authenticated user is the creator of the internship
+        // @ts-ignore - _id always exists on the User object despite TypeScript not recognizing it
+        if (application.internshipCreator.toString() !== req.user._id.toString()) {
+            return res.status(403).send('Not authorized to view this application');
+        }
+
+        res.status(200).json(application);
+    } catch (error) {
+        console.error('Error fetching application:', error);
+        res.status(500).json({ error: 'An error occurred while fetching the application' });
+    }
+});
 
 export { router as internshipRouter };

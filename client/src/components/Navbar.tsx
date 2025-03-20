@@ -76,6 +76,16 @@ function Navbar({ searchBox }: NavbarProps) {
                 {session.roles.includes("moderator") && (
                   <li>
                     <Link
+                      to="/applications/pending"
+                      className="block py-2 px-3 rounded"
+                    >
+                      Pending Applications
+                    </Link>
+                  </li>
+                )}
+                {session.roles.includes("moderator") && (
+                  <li>
+                    <Link
                       to="/internships/pending"
                       className="block py-2 px-3 rounded"
                     >
@@ -129,6 +139,14 @@ function Navbar({ searchBox }: NavbarProps) {
                               className="block px-4 py-2.5 hover:bg-slate-100"
                             >
                               Submit Posting
+                            </Link>
+                          )}
+                          {session.roles.includes("employer") && (
+                            <Link
+                              to="/applications/pending"
+                              className="block px-4 py-2.5 hover:bg-slate-100"
+                            >
+                              Pending Applications
                             </Link>
                           )}
                           {session.roles.includes("moderator") && (

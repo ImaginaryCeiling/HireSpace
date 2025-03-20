@@ -13,6 +13,8 @@ import Approval from "./routes/approval";
 import View from "./routes/view";
 import PendingApproval from "./routes/pendingApproval";
 import Application from "./routes/apply";
+import PendingApplications from "./routes/pendingApplications";
+import ReviewApplication from "./routes/reviewApplication";
 import { API_URL } from "./constants";
 
 function App() {
@@ -53,6 +55,14 @@ function App() {
       path: "/internships/pending",
       element: <PendingApproval />,
     },
+    {
+      path: "/applications/pending",
+      element: <PendingApplications />,
+    },
+    {
+      path: "/application/review/:id",
+      element: <ReviewApplication />,
+    }
   ]);
 
   const queryClient = new QueryClient();
