@@ -1,15 +1,11 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { SessionContext } from "../contexts";
-import logo from "../assets/Hirespace Logo.svg";
+import logo from "../assets/pclogo.png";
 
 interface NavbarProps {
   searchBox?: JSX.Element;
 }
-
-const logoStyle = {
-  filter: "brightness(0) invert(1)",
-};
 
 function Navbar({ searchBox }: NavbarProps) {
   const session = useContext(SessionContext);
@@ -23,11 +19,10 @@ function Navbar({ searchBox }: NavbarProps) {
           <Link to="/" className="flex text-white">
             <img
               src={logo}
-              className="h-9 me-2 -mt-1 fill-white"
-              style={logoStyle}
+              className="h-9 me-2 -mt-1"
             />
             <span className="self-center text-2xl font-semibold whitespace-nowrap me-16">
-              HireSpace
+              Catamount Careers
             </span>
           </Link>
           <div className="hidden w-full lg:block">{searchBox}</div>
@@ -56,11 +51,6 @@ function Navbar({ searchBox }: NavbarProps) {
         {/* Small screen navbar contents */}
         <div className={`${navbarOpen ? "" : "hidden"} w-full`}>
           <ul className="font-medium text-gray-200 flex flex-col ps-12">
-            <li>
-              <Link to="/" className="block py-2 px-3 rounded">
-                Find Internships
-              </Link>
-            </li>
             {session.loggedIn ? (
               <>
                 {session.roles.includes("moderator") && (
@@ -111,11 +101,6 @@ function Navbar({ searchBox }: NavbarProps) {
         {/* Large screen navbar contents */}
         <div className="hidden lg:block lg:w-auto">
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0">
-            <li>
-              <Link to="/" className="block py-2 px-3 rounded text-white">
-                Find Postings
-              </Link>
-            </li>
             <li>
               {session.loggedIn ? (
                 <>

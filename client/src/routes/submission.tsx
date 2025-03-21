@@ -24,7 +24,7 @@ function Submission() {
     if (session.username === null) {
       navigate("/login");
     } else if (!session.roles.includes("employer")) {
-      navigate("/");
+      navigate("/portal");
     }
   }, [session]);
 
@@ -81,7 +81,7 @@ function Submission() {
       .then((res) => {
         if (res.status === 200) {
           alert("Posting submitted successfully!");
-          navigate("/");
+          navigate("/portal");
         } else {
           toast.error("An error occurred");
         }

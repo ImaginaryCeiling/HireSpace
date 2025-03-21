@@ -31,7 +31,7 @@ function Approval() {
   // Ensure only moderators can access this page
   useEffect(() => {
     if (!session.roles.includes("moderator")) {
-      navigate("/");
+      navigate("/portal");
     }
   }, [session]);
 

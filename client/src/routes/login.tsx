@@ -15,7 +15,7 @@ function Login() {
   // Prevent logged in users from accessing this page
   useEffect(() => {
     if (session.username !== null) {
-      navigate("/");
+      navigate("/portal");
     }
   }, [session]);
 
@@ -50,7 +50,7 @@ function Login() {
               },
             });
           });
-          navigate("/");
+          navigate("/portal");
         } else if (res.status === 401) {
           toast.error("Invalid username or password");
         } else {

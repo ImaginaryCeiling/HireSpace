@@ -17,7 +17,7 @@ function Register() {
   // Prevent logged in users from accessing this page
   useEffect(() => {
     if (session.username !== null) {
-      navigate("/");
+      navigate("/portal");
     }
   }, [session]);
 

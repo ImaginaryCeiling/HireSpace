@@ -48,7 +48,7 @@ function SearchBox({
         <input
           type="text"
           className="block w-full rounded-lg border-0 py-2 pl-3 pr-20 text-primary placeholder-primary placeholder-bold ring-1 ring-inset ring-gray-300"
-          placeholder="Search Internships"
+          placeholder="Search Postings"
           onChange={(e) => setSearchQuery(e.target.value)}
         />
         <button

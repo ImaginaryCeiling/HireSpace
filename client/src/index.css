@@ -1,13 +1,40 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /* Make input placeholder bold (Equivalent to Tailwind.css: font-semibold) */
 .placeholder-bold::placeholder {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 /* Center the input number text within the input for Ant Design InputNumber elements */
 .inputNumberCentered .ant-input-number-input {
-    text-align: center;
+  text-align: center;
+}
+
+/* Round all buttons on the website EXCEPT navbar buttons */
+button:not(.bg-primary):not([class*="navbar"]):not(nav button),
+.btn:not(.bg-primary):not([class*="navbar"]),
+[type="button"]:not(.bg-primary):not([class*="navbar"]),
+[type="submit"]:not(.bg-primary):not([class*="navbar"]),
+[type="reset"]:not(.bg-primary):not([class*="navbar"]),
+a.btn:not(.bg-primary):not([class*="navbar"]),
+.button:not(.bg-primary):not([class*="navbar"]),
+.ant-btn:not(.bg-primary):not([class*="navbar"]) {
+  border-radius: 9999px !important; /* Fully rounded */
+}
+
+/* Specifically target application buttons */
+.bg-primary.text-white.rounded-lg,
+.border-primary.rounded-lg {
+  border-radius: 9999px !important;
+}
+
+/* Ensure navbar buttons keep their original styling */
+nav button,
+.bg-primary button,
+button.bg-primary,
+.navbar button,
+button.navbar {
+  border-radius: initial;
 }

@@ -15,7 +15,7 @@ function PendingApplications() {
   // Ensure only employers can access this page
   useEffect(() => {
     if (!session.roles.includes("employer")) {
-      navigate("/");
+      navigate("/portal");
     }
   }, [session]);
 

@@ -2,6 +2,7 @@ import express from 'express';
 import { Types } from 'mongoose';
 import { createInternship, Internship } from '../models/internship';
 import { createApplication, Application } from '../models/application';
+import { User } from '../models/user';
 
 const router = express.Router();
 
@@ -111,56 +112,65 @@ router.delete('/internship/:id/reject', async (req, res) => {
     res.status(200).send("Internship rejected");
 });
 
-router.post(
-    '/internship/:id/apply',
-    async (req, res) => {
-        // Check if the user is authenticated
-        if (!req.isAuthenticated()) {
-            return res.status(401).send('Not authenticated');
+router.post('/internship/:id/apply', async (req, res) => {
+    // Check if the user is authenticated
+    if (!req.isAuthenticated()) {
+        return res.status(401).send('Not authenticated');
+    }
+
+    try {
+        const internshipId = req.params.id;
+        const {
+            fullName,
+            email,
+            phoneNumber,
+            age,
+            location,
+            education,
+            workExperience,
+            skills,
+            fitAnswer,
+            resumeUrl
+        } = req.body;
+
+        // Validate internship existence
+        const internship = await Internship.findById(internshipId);
+        if (!internship) {
+            return res.status(404).send({ error: 'Internship not found' });
         }
 
-        // Check if the user has the student role
-        // @ts-ignore - roles always exists on the User object despite TypeScript not recognizing it
-        if (!req.user?.roles.includes('student')) {
-            return res.status(403).send('Not authorized');
-        }
+        // Validate user existence
+        const internshipCreator = internship.creator; // Assuming the internship model has a creator field
+        // @ts-ignore
+        const user = req.user._id;
 
-        const { id } = req.params;
-        const { fitAnswer, resumeUrl } = req.body;
-        // @ts-ignore - _id always exists on the User object despite TypeScript not recognizing it
-        const userId = req.user._id;
+        const application = new Application({
+            internship: internshipId,
+            internshipCreator,
+            user,
+            fullName,
+            email,
+            phoneNumber,
+            age: Number(age), // Ensure age is a number
+            location,
+            education,
+            workExperience,
+            skills,
+            fitAnswer,
+            resumeUrl
+        })
 
-        // Validate the internship ID
-        if (!Types.ObjectId.isValid(id)) {
-            return res.status(400).send('Invalid internship ID');
-        }
-
-        try {
-            // Check if the internship exists
-            const internship = await Internship.findById(id);
-            if (!internship) {
-                return res.status(404).send('Internship not found');
-            }
-
-            // Create a new application
-            const application = new Application({
-                internship: id,
-                internshipCreator: internship.creator,
-                user: userId,
-                fitAnswer,
-                resumeUrl,
-            });
-
-            // Save the application to the database
-            await application.save();
-
-            res.status(200).json({ message: 'Application submitted successfully' });
-        } catch (error) {
-            console.error('Error submitting application:', error);
-            res.status(500).json({ error: 'An error occurred while submitting the application' });
+        await application.save();
+        res.status(201).send(application);
+    } catch (error: unknown) {
+        console.log(error);
+        if (error instanceof Error) {
+            res.status(400).send({ error: error.message });
+        } else {
+            res.status(400).send({ error: 'An unknown error occurred' });
         }
     }
-);
+});
 
 router.get('/applications/pending', async (req, res) => {
     // Check if the user is authenticated

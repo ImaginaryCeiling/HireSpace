@@ -16,11 +16,16 @@ import Application from "./routes/apply";
 import PendingApplications from "./routes/pendingApplications";
 import ReviewApplication from "./routes/reviewApplication";
 import { API_URL } from "./constants";
+import CatamountCareersWithStyles from "./routes/landing";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
+      element: <CatamountCareersWithStyles />
+    },
+    {
+      path: "/portal",
       element: <Root />,
     },
     {
