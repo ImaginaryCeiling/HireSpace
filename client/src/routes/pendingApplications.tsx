@@ -67,7 +67,7 @@ function PendingApplications() {
       <Navbar />
       <div className="container px-6 mx-auto mt-10">
         <h1 className="text-3xl font-semibold text-center">
-          Applications Pending Approval
+          Applications Pending Review
         </h1>
         <p className="text-center text-gray-600 mt-2">
           Showing {applications.length} application
@@ -75,7 +75,7 @@ function PendingApplications() {
         </p>
         {applications.length === 0 && (
           <p className="text-xl text-center text-gray-600 mt-5">
-            No applications pending approval
+            No applications pending review
           </p>
         )}
         <div className="mt-5 divide-y">

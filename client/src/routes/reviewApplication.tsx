@@ -74,7 +74,6 @@ function ReviewApplication() {
           Why the Candidate is a Good Fit
         </h3>
         <p className="lg:text-justify text-lg mt-2">
-          {/* Safely render newlines in the fit answer */}
           {application?.fitAnswer
             .split("\n")
             .map((line: string, i: number) => (
@@ -93,6 +92,17 @@ function ReviewApplication() {
           >
             View Resume
           </a>
+        </div>
+        <div className="mt-10">
+          <h3 className="text-2xl font-semibold text-center">Application Details</h3>
+          <p className="text-lg mt-2"><strong>Full Name:</strong> {application?.fullName}</p>
+          <p className="text-lg mt-2"><strong>Email:</strong> {application?.email}</p>
+          <p className="text-lg mt-2"><strong>Phone Number:</strong> {application?.phoneNumber}</p>
+          <p className="text-lg mt-2"><strong>Age:</strong> {application?.age}</p>
+          <p className="text-lg mt-2"><strong>Location:</strong> {application?.location}</p>
+          <p className="text-lg mt-2"><strong>Education:</strong> {application?.education}</p>
+          <p className="text-lg mt-2"><strong>Work Experience:</strong> {application?.workExperience}</p>
+          <p className="text-lg mt-2"><strong>Skills:</strong> {application?.skills}</p>
         </div>
       </div>
       <ToastContainer position="top-center" />
